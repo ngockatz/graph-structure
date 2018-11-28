@@ -29,7 +29,9 @@ public interface Graph {
     /**Returns true iff the graph has the edge*/
     boolean hasEdge(int v, int w);
 
-    /**Returns an array containing the indicies of the neighbors of v*/
+    /**
+     * Returns an array containing the indices of the neighbors of v
+     */
     int[] neighbors(int v);
 
 }

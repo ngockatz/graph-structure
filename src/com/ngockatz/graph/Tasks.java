@@ -7,11 +7,13 @@ public class Tasks {
     private static final int VISITED = 1;
     private static final int INFINITY = Integer.MAX_VALUE;
     static int[] parent;
+    static int[] prim;
 
     static void printBFS(Graph G, int v) {
         for (int i = 0; i < G.noV(); i++)
             G.setFlag(i, UNVISITED);
         BFS(G, v);
+        System.out.println("BFS completed");
     }
 
     static void BFS(Graph G, int v) {
@@ -34,6 +36,7 @@ public class Tasks {
         for (int i = 0; i < G.noV(); i++)
             G.setFlag(i, UNVISITED);
         DFS(G, v);
+        System.out.println("DFS completed");
     }
 
     static void DFS(Graph G, int v) {
@@ -52,7 +55,7 @@ public class Tasks {
      * @param s Start vertex
      * @param D Array storing distances
      */
-    static void Dijkstra(Graph G, int s, int o, int[] D) {
+    static void Dijkstra(Graph G, int s, int[] D) {
         for (int i = 0; i < G.noV(); i++) {
             D[i] = INFINITY;  // Initialize distance
             G.setFlag(i,UNVISITED);
@@ -63,7 +66,6 @@ public class Tasks {
         for (int i = 0; i < G.noV(); i++) {
             // next closest vertex
             int v = minVertex(G, D);
-            if (v==o) break;
             G.setFlag(v, VISITED);
             if (D[v] == INFINITY) return; // Unreachable
             int[] nb = G.neighbors(v);
@@ -88,18 +90,14 @@ public class Tasks {
         for (int i = 0; i < G.noV(); i++)
             if (G.getFlag(i) == UNVISITED && D[i] < D[v])
                 v = i;
-
         return v;
     }
 
     static void DijkstraPQ(Graph G, int s, int[] D) {
-        // the current vertex
         parent = new int[G.noV()];
+        // the current vertex
         int v;
-        //DijPair[] E = new DijPair[G.noV()];
-        //E[0] = new DijPair(0, s);  //initial vertex
         PriorityQueue<DijPair> PQ = new PriorityQueue<>(G.noE());
-        //PQ.add(E[0]);
         PQ.add(new DijPair(0,s));
         // Initialize distance
         for (int i = 0; i < G.noV(); i++) {
@@ -128,15 +126,35 @@ public class Tasks {
                 }
             }
         }
-
     }
     static void printPathBetween(Graph G, int s, int d){
         System.out.print(s + " -> ");
         printPath(G, s, d);
+        System.out.println("Path completed");
     }
     static void printPath(Graph G, int s, int d){
         if(parent[d] == -1 ) return;
         printPath(G, s, parent[d]);
         System.out.print(d + " -> ");
+    }
+
+    static void Prim(Graph G, int s, int[] D, int[] P) {
+        for (int i = 0; i < G.noV(); i++) {
+            D[i] = INFINITY;
+            G.setFlag(i, UNVISITED);
+        }
+        D[s] = 0;
+        for (int i = 0; i < G.noV(); i++) {
+            int v = minVertex(G, D);
+            G.setFlag(v, VISITED);
+            if (D[v] == INFINITY) return;
+            int[] nb = G.neighbors(v);
+            for (int w : nb) {
+                if (D[w] > G.weight(v, w)) {
+                    D[w] = G.weight(v, w);
+                    P[w] = v;
+                }
+            }
+        }
     }
 }

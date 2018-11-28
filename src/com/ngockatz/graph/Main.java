@@ -1,7 +1,5 @@
 package com.ngockatz.graph;
 
-import javafx.concurrent.Task;
-
 import java.util.Arrays;
 
 public class Main {
@@ -16,10 +14,10 @@ public class Main {
         G.setUndirectedEdge(3,5,2);
         G.setUndirectedEdge(2,5,2);
         Tasks.printDFS(G,0);
-        System.out.println();
         Tasks.printBFS(G,0);
         System.out.println("-------L below--------");
-        GraphL GL = new GraphL(6);
+
+        GraphL GL = new GraphL(7);
         GL.setEdge(0,2,7);
         GL.setEdge(0,4,9);
         GL.setEdge(2,3,1);
@@ -31,7 +29,20 @@ public class Main {
         int[] D = new int[GL.noV()];
         Tasks.DijkstraPQ(GL, 0, D);
         System.out.println(Arrays.toString(D));
-        //System.out.println(Tasks.minDistance(G, 0, 5));
         Tasks.printPathBetween(G,0,5);
+
+        GraphL G4 = new GraphL(4);
+        G4.setEdge(0, 1, 10);
+        G4.setEdge(1, 2, 3);
+        G4.setEdge(0, 2, 20);
+        G4.setEdge(2, 3, 15);
+        G4.setEdge(0, 3, 20);
+        int[] Dz = new int[G4.noV()];
+        int[] P = new int[G4.noV()];
+        Tasks.Prim(G4, 0, Dz, P);
+        System.out.println("Prim: " + Arrays.toString(P));
+        for (int k = 1; k < P.length; k++) {
+            System.out.print(P[k] + " -> " + k + " -> ");
+        }
     }
 }

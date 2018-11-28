@@ -5,7 +5,7 @@ import java.util.Queue;
 
 public class GraphM implements Graph {
 
-    private int[][] matrix; //graph info
+    private int[][] matrix; //graph
     private int[] Flags; //to help with traversal
     private int noEdge; //number of edges
     private static final int UNVISITED=0;

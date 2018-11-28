@@ -11,10 +11,9 @@ package com.ngockatz.graph;
  */
 
 public class Edge {
-    int vertex; //
-    int weight; //weight of this edge
+    int vertex;
+    int weight;
     Edge next;
-    //Edge prev;
 
     Edge(int v, int w, Edge n) {
         vertex = v;

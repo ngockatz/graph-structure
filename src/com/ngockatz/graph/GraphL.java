@@ -55,8 +55,6 @@ public class GraphL implements Graph {
         else {
             //create new node when not exist
             curr.next = new Edge(w,wgt,curr.next);
-            //update prev pointer or the node after new node
-            //if (curr.next.next!=null) curr.next.next.prev=curr.next;
             noEdge++;
         }
     }
@@ -72,7 +70,6 @@ public class GraphL implements Graph {
         if(curr.next==null || curr.next.vertex!=w) return;
         else {
             curr.next=curr.next.next;
-            //if(curr.next!=null)curr.next.prev = curr;
             noEdge--;
         }
     }
